@@ -1,0 +1,41 @@
+2025-07-14 15:08:49,813 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:08:49,881 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:08:50,015 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:09:10,600 - base.base_page - ERROR - Element not found: ('id', 'username')
+2025-07-14 15:09:10,797 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_150910.png
+2025-07-14 15:09:11,123 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:09:12,920 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:09:12,930 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:09:13,031 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:09:33,610 - base.base_page - ERROR - Element not found: ('id', 'username')
+2025-07-14 15:09:33,792 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_150933.png
+2025-07-14 15:09:34,061 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:09:35,752 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:09:35,762 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:09:35,802 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:09:56,354 - base.base_page - ERROR - Element not found: ('id', 'username')
+2025-07-14 15:09:56,528 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_150956.png
+2025-07-14 15:09:56,794 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:09:58,758 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:09:58,773 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:09:58,870 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:10:19,407 - base.base_page - ERROR - Element not found: ('id', 'username')
+2025-07-14 15:10:19,585 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_151019.png
+2025-07-14 15:10:19,863 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:10:21,761 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:10:21,771 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:10:21,803 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:10:42,375 - base.base_page - ERROR - Element not found: ('id', 'username')
+2025-07-14 15:10:42,549 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_151042.png
+2025-07-14 15:10:42,824 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:10:45,207 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:10:45,209 - base.base_page - INFO - Opening URL: https://example.com
+2025-07-14 15:11:08,598 - base.base_page - ERROR - Element not found: ('name', 'search')
+2025-07-14 15:11:08,798 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_151108.png
+2025-07-14 15:11:09,099 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:11:11,984 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:11:11,988 - base.base_page - INFO - Opening URL: https://example.com
+2025-07-14 15:11:35,238 - base.base_page - ERROR - Element not found: ('name', 'search')
+2025-07-14 15:11:35,436 - base.base_page - INFO - Screenshot saved: screenshots/element_not_found_20250714_151135.png
+2025-07-14 15:11:35,724 - conftest - INFO - WebDriver closed successfully
+2025-07-14 15:11:35,726 - conftest - INFO - Custom HTML report generated: reports/test_report_20250714_151135.html

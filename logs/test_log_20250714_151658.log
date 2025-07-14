@@ -1,0 +1,5 @@
+2025-07-14 15:17:01,908 - conftest - INFO - WebDriver created successfully: chrome
+2025-07-14 15:17:01,920 - base.base_page - INFO - Opening URL: data:,/login
+2025-07-14 15:17:02,092 - base.base_page - INFO - Page loaded completely
+2025-07-14 15:17:11,613 - conftest - INFO - Custom HTML report generated: reports/test_report_20250714_151711.html
+2025-07-14 15:17:11,620 - conftest - INFO - WebDriver closed successfully

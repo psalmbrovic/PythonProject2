@@ -1,0 +1,27 @@
+
+{
+  "valid_users": [
+    {
+      "username": "testuser1@example.com",
+      "password": "testpass123",
+      "role": "admin"
+    },
+    {
+      "username": "testuser2@example.com",
+      "password": "testpass456",
+      "role": "user"
+    }
+  ],
+  "invalid_users": [
+    {
+      "username": "invalid@example.com",
+      "password": "wrongpass",
+      "expected_error": "Invalid credentials"
+    },
+    {
+      "username": "locked@example.com",
+      "password": "testpass123",
+      "expected_error": "Account locked"
+    }
+  ]
+}

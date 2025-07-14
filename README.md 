@@ -1,0 +1,236 @@
+# Python Selenium Test Framework
+
+A comprehensive, production-ready Selenium test automation framework with advanced reporting capabilities.
+
+## 🚀 Features
+
+- **Multi-browser Support**: Chrome, Firefox, Edge
+- **Page Object Model**: Clean, maintainable page objects
+- **Custom HTML Reports**: Beautiful, interactive test reports
+- **Allure Integration**: Advanced reporting with Allure
+- **Parallel Execution**: Run tests in parallel for faster execution
+- **Screenshot Capture**: Automatic screenshots on test failures
+- **Configuration Management**: Environment-based configuration
+- **Test Data Management**: Support for JSON, CSV, Excel data sources
+- **Logging**: Comprehensive logging with different levels
+- **CI/CD Ready**: Easy integration with CI/CD pipelines
+
+## 📁 Project Structure
+
+```
+selenium_framework/
+├── base/
+│   └── base_page.py          # Base page class with common methods
+├── config/
+│   └── config.py             # Configuration management
+├── pages/
+│   └── sample_page.py        # Page object classes
+├── tests/
+│   ├── test_login.py         # Sample test cases
+│   └── test_search.py        # More test cases
+├── utils/
+│   ├── driver_factory.py     # WebDriver factory
+│   ├── logger.py             # Logging utilities
+│   └── test_data_manager.py  # Test data management
+├── reports/
+│   └── html_report_generator.py # Custom HTML reports
+├── test_data/
+│   └── login_data.json       # Test data files
+├── requirements.txt          # Dependencies
+├── conftest.py              # Pytest configuration
+├── pytest.ini              # Pytest settings
+├── Makefile                 # Build commands
+└── README.md               # This file
+```
+
+## 🛠️ Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd selenium_framework
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   make install
+   # or
+   pip install -r requirements.txt
+   ```
+
+3. **Setup directories**:
+   ```bash
+   make setup-dirs
+   ```
+
+## 🏃‍♂️ Running Tests
+
+### Basic Usage
+```bash
+# Run all tests
+make test
+
+# Run specific test file
+pytest tests/test_login.py -v
+
+# Run tests with specific marker
+pytest tests/ -m smoke -v
+```
+
+### Advanced Usage
+```bash
+# Run tests in parallel
+make test-parallel
+
+# Run tests in headless mode
+make test-headless
+
+# Run tests with custom browser
+BROWSER=firefox pytest tests/ -v
+
+# Run tests with custom environment
+BASE_URL=https://staging.example.com pytest tests/ -v
+```
+
+## 📊 Reports
+
+### Custom HTML Report
+The framework generates a beautiful, interactive HTML report automatically after test execution:
+- Test summary with pass/fail statistics
+- Interactive progress bars
+- Detailed test results with screenshots
+- Error message expansion
+- Mobile-responsive design
+
+### Allure Reports
+```bash
+# Generate and serve Allure report
+make report
+
+# Generate static Allure report
+make generate-allure
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+```bash
+export BASE_URL="https://example.com"
+export BROWSER="chrome"  # chrome, firefox, edge
+export HEADLESS="true"   # true, false
+export SCREENSHOT_ON_FAILURE="true"
+```
+
+### Config File
+Edit `config/config.py` to modify default settings:
+- Timeouts
+- Browser preferences
+- Report directories
+- Screenshot settings
+
+## 📝 Writing Tests
+
+### Page Object Example
+```python
+from selenium.webdriver.common.by import By
+from base.base_page import BasePage
+
+class LoginPage(BasePage):
+    USERNAME_INPUT = (By.ID, "username")
+    PASSWORD_INPUT = (By.ID, "password")
+    LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
+
+    def login(self, username: str, password: str):
+        self.send_keys(self.USERNAME_INPUT, username)
+        self.send_keys(self.PASSWORD_INPUT, password)
+        self.click(self.LOGIN_BUTTON)
+```
+
+### Test Example
+```python
+import pytest
+import allure
+from pages.login_page import LoginPage
+
+class TestLogin:
+    @allure.feature("Authentication")
+    @pytest.mark.smoke
+    def test_valid_login(self, driver):
+        login_page = LoginPage(driver)
+        login_page.open()
+        login_page.login("user@example.com", "password123")
+        assert login_page.is_login_successful()
+```
+
+## 🧪 Test Data Management
+
+### JSON Data
+```python
+from utils.test_data_manager import TestDataManager
+
+# Load JSON data
+data = TestDataManager.load_json("test_data/users.json")
+username = data["valid_users"][0]["username"]
+```
+
+### CSV Data
+```python
+# Load CSV data
+users = TestDataManager.load_csv("test_data/users.csv")
+for user in users:
+    print(f"Testing user: {user['username']}")
+```
+
+## 🐛 Debugging
+
+### Screenshots
+Screenshots are automatically captured on test failures and saved to the `screenshots/` directory.
+
+### Logs
+Detailed logs are saved to the `logs/` directory with timestamps.
+
+### Manual Screenshot
+```python
+def test_example(self, driver):
+    page = BasePage(driver)
+    page.take_screenshot("manual_screenshot")
+```
+
+## 🚀 CI/CD Integration
+
+### GitHub Actions Example
+```yaml
+name: Test Automation
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: make install
+      - name: Run tests
+        run: HEADLESS=true make test
+      - name: Upload reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: reports/
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Run the test suite
+6. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.

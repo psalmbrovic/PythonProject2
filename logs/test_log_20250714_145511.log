@@ -1,0 +1,8 @@
+2025-07-14 14:55:16,730 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:17,804 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:19,810 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:21,193 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:22,429 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:24,197 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:25,596 - conftest - ERROR - Failed to create WebDriver: [Errno 8] Exec format error: '/Users/abatansamuel/.wdm/drivers/chromedriver/mac64/138.0.7204.94/chromedriver-mac-arm64/THIRD_PARTY_NOTICES.chromedriver'
+2025-07-14 14:55:25,639 - conftest - INFO - Custom HTML report generated: reports/test_report_20250714_145525.html
