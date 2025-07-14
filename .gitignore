@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# PyCharm settings
+.idea/
+
+# macOS
+.DS_Store
+
+# Test and coverage files
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+.cache
+nosetests.xml
+coverage.xml
+*.log
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.wheel
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# dotenv environment variables
+.env
+.env.*
+
+# VSCode settings
+.vscode/
+
+# Selenium downloads
+*.crdownload
