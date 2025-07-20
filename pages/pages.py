@@ -3,14 +3,22 @@ from base.base_page import BasePage
 
 
 class LoginPage(BasePage):
-	"""Sample login page object"""
+	""" login page object"""
 
-	# Locators
-	USERNAME_INPUT = (By.ID, "username")
-	PASSWORD_INPUT = (By.ID, "password")
+	# Locators Prod
+	USERNAME_INPUT = (By.XPATH, "//Input[@placeholder='Email Address']")
+	PASSWORD_INPUT = (By.XPATH, "//Input[@placeholder='Password']")
 	LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
-	ERROR_MESSAGE = (By.CLASS_NAME, "error-message")
-	FORGOT_PASSWORD_LINK = (By.LINK_TEXT, "Forgot Password?")
+	ERROR_MESSAGE = (By.XPATH, "error-message")
+	FORGOT_PASSWORD_LINK = (By.XPATH, "//a[@href='/password-reset']")
+	
+
+	# # Locators Staging
+	# USERNAME_INPUT = (By.ID, "username")
+	# PASSWORD_INPUT = (By.ID, "password")
+	# LOGIN_BUTTON = (By.XPATH, "//button[@type='submit']")
+	# ERROR_MESSAGE = (By.CLASS_NAME, "error-message")
+	# FORGOT_PASSWORD_LINK = (By.LINK_TEXT, "Forgot Password?")
 
 	def __init__(self, driver):
 		super().__init__(driver)

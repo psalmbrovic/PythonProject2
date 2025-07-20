@@ -2,12 +2,12 @@
 {
   "valid_users": [
     {
-      "username": "testuser1@example.com",
-      "password": "testpass123",
+      "username": "test@123",
+      "password": "1234567678",
       "role": "admin"
     },
     {
-      "username": "testuser2@example.com",
+      "username": "test@123",
       "password": "testpass456",
       "role": "user"
     }

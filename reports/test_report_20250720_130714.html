@@ -1,0 +1,745 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Test Execution Report</title>
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background: #f5f5f5;
+                    color: #333;
+                    line-height: 1.6;
+                }
+
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+
+                .header {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    margin-bottom: 30px;
+                    text-align: center;
+                }
+
+                .header h1 {
+                    font-size: 2.5em;
+                    margin-bottom: 10px;
+                }
+
+                .header .timestamp {
+                    opacity: 0.9;
+                    font-size: 1.1em;
+                }
+
+                .summary {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 20px;
+                    margin-bottom: 30px;
+                }
+
+                .summary-card {
+                    background: white;
+                    padding: 25px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    text-align: center;
+                    transition: transform 0.3s ease;
+                }
+
+                .summary-card:hover {
+                    transform: translateY(-5px);
+                }
+
+                .summary-card h3 {
+                    font-size: 2.5em;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                }
+
+                .summary-card p {
+                    color: #666;
+                    font-size: 1.1em;
+                }
+
+                .total { color: #3498db; }
+                .passed { color: #27ae60; }
+                .failed { color: #e74c3c; }
+                .skipped { color: #f39c12; }
+
+                .pass-rate {
+                    background: white;
+                    padding: 25px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    margin-bottom: 30px;
+                    text-align: center;
+                }
+
+                .progress-bar {
+                    width: 100%;
+                    height: 30px;
+                    background: #ecf0f1;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    margin: 15px 0;
+                }
+
+                .progress-fill {
+                    height: 100%;
+                    background: linear-gradient(90deg, #27ae60, #2ecc71);
+                    width: 0.0%;
+                    transition: width 1s ease;
+                }
+
+                .tests-table {
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    overflow: hidden;
+                }
+
+                .table-header {
+                    background: #34495e;
+                    color: white;
+                    padding: 20px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                th, td {
+                    padding: 15px;
+                    text-align: left;
+                    border-bottom: 1px solid #ecf0f1;
+                }
+
+                th {
+                    background: #34495e;
+                    color: white;
+                    font-weight: 600;
+                }
+
+                tr:hover {
+                    background: #f8f9fa;
+                }
+
+                .status {
+                    padding: 5px 12px;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 0.8em;
+                }
+
+                .status.passed {
+                    background: #d4edda;
+                    color: #155724;
+                }
+
+                .status.failed {
+                    background: #f8d7da;
+                    color: #721c24;
+                }
+
+                .status.skipped {
+                    background: #fff3cd;
+                    color: #856404;
+                }
+
+                .error-message {
+                    max-width: 300px;
+                    word-wrap: break-word;
+                    font-size: 0.9em;
+                    color: #e74c3c;
+                }
+
+                .footer {
+                    text-align: center;
+                    margin-top: 30px;
+                    padding: 20px;
+                    color: #666;
+                }
+
+                @media (max-width: 768px) {
+                    .container {
+                        padding: 10px;
+                    }
+
+                    .summary {
+                        grid-template-columns: 1fr;
+                    }
+
+                    table {
+                        font-size: 0.9em;
+                    }
+
+                    th, td {
+                        padding: 10px 5px;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🚀 Test Execution Report</h1>
+                    <div class="timestamp">Generated on: 2025-07-20 13:07:14</div>
+                </div>
+
+                <div class="summary">
+                    <div class="summary-card">
+                        <h3 class="total">5</h3>
+                        <p>Total Tests</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3 class="passed">0</h3>
+                        <p>Passed</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3 class="failed">5</h3>
+                        <p>Failed</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3 class="skipped">0</h3>
+                        <p>Skipped</p>
+                    </div>
+                </div>
+
+                <div class="pass-rate">
+                    <h2>Pass Rate: 0.0%</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="tests-table">
+                    <div class="table-header">
+                        <h2>📋 Test Results Details</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Test Name</th>
+                                <th>Test Class</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Error Message</th>
+                                <th>Screenshot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                <tr class="failed">
+                    <td>1</td>
+                    <td>test_valid_login</td>
+                    <td>TestLogin</td>
+                    <td><span class="status failed">FAILED</span></td>
+                    <td>20.27s</td>
+                    <td>self = <tests.test_login.TestLogin object at 0x104e5e720>
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="6dcfd4373e21d947fd4068ffe2027f5f")>
+
+    @allure.feature("Authentication")
+    @allure.story("Valid Login")
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_valid_login(self, driver):
+    	"""Test valid login credentials"""
+    	login_page = LoginPage(driver)
+    	home_page = HomePage(driver)
+    
+    	# Test data
+    	username = "testuser@example.com"
+    	password = "testpassword123"
+    
+    	# Test steps
+    	with allure.step("Open login page"):
+    		login_page.open_login_page()
+    
+    	with allure.step("Enter valid credentials"):
+>   		login_page.login(username, password)
+
+tests/test_login.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages/pages.py:46: in login
+    self.enter_username(username)
+pages/pages.py:34: in enter_username
+    self.send_keys(self.USERNAME_INPUT, username)
+base/base_page.py:68: in send_keys
+    element = self.find_element(locator, timeout)
+base/base_page.py:35: in find_element
+    element = wait.until(EC.presence_of_element_located(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="6dcfd4373e21d947fd4068ffe2027f5f")>
+method = <function presence_of_element_located.<locals>._predicate at 0x104ef8ae0>, message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       0   chromedriver                        0x0000000102b3f55c cxxbridge1$str$ptr + 2731064
+E       1   chromedriver                        0x0000000102b37454 cxxbridge1$str$ptr + 2698032
+E       2   chromedriver                        0x00000001026863f8 cxxbridge1$string$len + 90664
+E       3   chromedriver                        0x00000001026cd71c cxxbridge1$string$len + 382284
+E       4   chromedriver                        0x000000010270eb1c cxxbridge1$string$len + 649548
+E       5   chromedriver                        0x00000001026c1a0c cxxbridge1$string$len + 333884
+E       6   chromedriver                        0x0000000102b025e0 cxxbridge1$str$ptr + 2481340
+E       7   chromedriver                        0x0000000102b05848 cxxbridge1$str$ptr + 2494244
+E       8   chromedriver                        0x0000000102ae3234 cxxbridge1$str$ptr + 2353424
+E       9   chromedriver                        0x0000000102b06104 cxxbridge1$str$ptr + 2496480
+E       10  chromedriver                        0x0000000102ad42e4 cxxbridge1$str$ptr + 2292160
+E       11  chromedriver                        0x0000000102b25ff8 cxxbridge1$str$ptr + 2627284
+E       12  chromedriver                        0x0000000102b26184 cxxbridge1$str$ptr + 2627680
+E       13  chromedriver                        0x0000000102b37090 cxxbridge1$str$ptr + 2697068
+E       14  libsystem_pthread.dylib             0x000000018181ec0c _pthread_start + 136
+E       15  libsystem_pthread.dylib             0x0000000181819b80 thread_start + 8
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/selenium/webdriver/support/wait.py:101: TimeoutException</td>
+                    <td><a href="True" target="_blank">📷 View</a></td>
+                </tr>
+            
+                <tr class="failed">
+                    <td>2</td>
+                    <td>test_invalid_login</td>
+                    <td>TestLogin</td>
+                    <td><span class="status failed">FAILED</span></td>
+                    <td>20.27s</td>
+                    <td>self = <tests.test_login.TestLogin object at 0x104843440>
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="cf1a1d314f936f93ab4a74c8540d6452")>
+
+    @allure.feature("Authentication")
+    @allure.story("Invalid Login")
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_invalid_login(self, driver):
+    	"""Test invalid login credentials"""
+    	login_page = LoginPage(driver)
+    
+    	# Test data
+    	username = "invalid@example.com"
+    	password = "wrongpassword"
+    
+    	# Test steps
+    	with allure.step("Open login page"):
+    		login_page.open_login_page()
+    
+    	with allure.step("Enter invalid credentials"):
+>   		login_page.login(username, password)
+
+tests/test_login.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages/pages.py:46: in login
+    self.enter_username(username)
+pages/pages.py:34: in enter_username
+    self.send_keys(self.USERNAME_INPUT, username)
+base/base_page.py:68: in send_keys
+    element = self.find_element(locator, timeout)
+base/base_page.py:35: in find_element
+    element = wait.until(EC.presence_of_element_located(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="cf1a1d314f936f93ab4a74c8540d6452")>
+method = <function presence_of_element_located.<locals>._predicate at 0x104f26020>, message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       0   chromedriver                        0x00000001030cf55c cxxbridge1$str$ptr + 2731064
+E       1   chromedriver                        0x00000001030c7454 cxxbridge1$str$ptr + 2698032
+E       2   chromedriver                        0x0000000102c163f8 cxxbridge1$string$len + 90664
+E       3   chromedriver                        0x0000000102c5d71c cxxbridge1$string$len + 382284
+E       4   chromedriver                        0x0000000102c9eb1c cxxbridge1$string$len + 649548
+E       5   chromedriver                        0x0000000102c51a0c cxxbridge1$string$len + 333884
+E       6   chromedriver                        0x00000001030925e0 cxxbridge1$str$ptr + 2481340
+E       7   chromedriver                        0x0000000103095848 cxxbridge1$str$ptr + 2494244
+E       8   chromedriver                        0x0000000103073234 cxxbridge1$str$ptr + 2353424
+E       9   chromedriver                        0x0000000103096104 cxxbridge1$str$ptr + 2496480
+E       10  chromedriver                        0x00000001030642e4 cxxbridge1$str$ptr + 2292160
+E       11  chromedriver                        0x00000001030b5ff8 cxxbridge1$str$ptr + 2627284
+E       12  chromedriver                        0x00000001030b6184 cxxbridge1$str$ptr + 2627680
+E       13  chromedriver                        0x00000001030c7090 cxxbridge1$str$ptr + 2697068
+E       14  libsystem_pthread.dylib             0x000000018181ec0c _pthread_start + 136
+E       15  libsystem_pthread.dylib             0x0000000181819b80 thread_start + 8
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/selenium/webdriver/support/wait.py:101: TimeoutException</td>
+                    <td><a href="True" target="_blank">📷 View</a></td>
+                </tr>
+            
+                <tr class="failed">
+                    <td>3</td>
+                    <td>test_empty_credentials[--Username and password are required]</td>
+                    <td>TestLogin</td>
+                    <td><span class="status failed">FAILED</span></td>
+                    <td>20.28s</td>
+                    <td>self = <tests.test_login.TestLogin object at 0x1045a1700>
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="2d661ed096309f89963a2d02f83cf030")>, username = '', password = ''
+expected_error = 'Username and password are required'
+
+    @allure.feature("Authentication")
+    @allure.story("Empty Credentials")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("username,password,expected_error", [
+    	("", "", "Username and password are required"),
+    	("user@test.com", "", "Password is required"),
+    	("", "password123", "Username is required")
+    ])
+    def test_empty_credentials(self, driver, username, password, expected_error):
+    	"""Test login with empty credentials"""
+    	login_page = LoginPage(driver)
+    
+    	with allure.step("Open login page"):
+    		login_page.open_login_page()
+    
+    	with allure.step(f"Enter credentials: {username}, {password}"):
+>   		login_page.login(username, password)
+
+tests/test_login.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages/pages.py:46: in login
+    self.enter_username(username)
+pages/pages.py:34: in enter_username
+    self.send_keys(self.USERNAME_INPUT, username)
+base/base_page.py:68: in send_keys
+    element = self.find_element(locator, timeout)
+base/base_page.py:35: in find_element
+    element = wait.until(EC.presence_of_element_located(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="2d661ed096309f89963a2d02f83cf030")>
+method = <function presence_of_element_located.<locals>._predicate at 0x104f262a0>, message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       0   chromedriver                        0x000000010339b55c cxxbridge1$str$ptr + 2731064
+E       1   chromedriver                        0x0000000103393454 cxxbridge1$str$ptr + 2698032
+E       2   chromedriver                        0x0000000102ee23f8 cxxbridge1$string$len + 90664
+E       3   chromedriver                        0x0000000102f2971c cxxbridge1$string$len + 382284
+E       4   chromedriver                        0x0000000102f6ab1c cxxbridge1$string$len + 649548
+E       5   chromedriver                        0x0000000102f1da0c cxxbridge1$string$len + 333884
+E       6   chromedriver                        0x000000010335e5e0 cxxbridge1$str$ptr + 2481340
+E       7   chromedriver                        0x0000000103361848 cxxbridge1$str$ptr + 2494244
+E       8   chromedriver                        0x000000010333f234 cxxbridge1$str$ptr + 2353424
+E       9   chromedriver                        0x0000000103362104 cxxbridge1$str$ptr + 2496480
+E       10  chromedriver                        0x00000001033302e4 cxxbridge1$str$ptr + 2292160
+E       11  chromedriver                        0x0000000103381ff8 cxxbridge1$str$ptr + 2627284
+E       12  chromedriver                        0x0000000103382184 cxxbridge1$str$ptr + 2627680
+E       13  chromedriver                        0x0000000103393090 cxxbridge1$str$ptr + 2697068
+E       14  libsystem_pthread.dylib             0x000000018181ec0c _pthread_start + 136
+E       15  libsystem_pthread.dylib             0x0000000181819b80 thread_start + 8
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/selenium/webdriver/support/wait.py:101: TimeoutException</td>
+                    <td><a href="True" target="_blank">📷 View</a></td>
+                </tr>
+            
+                <tr class="failed">
+                    <td>4</td>
+                    <td>test_empty_credentials[user@test.com--Password is required]</td>
+                    <td>TestLogin</td>
+                    <td><span class="status failed">FAILED</span></td>
+                    <td>20.20s</td>
+                    <td>self = <tests.test_login.TestLogin object at 0x1045a1160>
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="0408aa5915295d890b084ecfbecbca1f")>, username = 'user@test.com', password = ''
+expected_error = 'Password is required'
+
+    @allure.feature("Authentication")
+    @allure.story("Empty Credentials")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("username,password,expected_error", [
+    	("", "", "Username and password are required"),
+    	("user@test.com", "", "Password is required"),
+    	("", "password123", "Username is required")
+    ])
+    def test_empty_credentials(self, driver, username, password, expected_error):
+    	"""Test login with empty credentials"""
+    	login_page = LoginPage(driver)
+    
+    	with allure.step("Open login page"):
+    		login_page.open_login_page()
+    
+    	with allure.step(f"Enter credentials: {username}, {password}"):
+>   		login_page.login(username, password)
+
+tests/test_login.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages/pages.py:46: in login
+    self.enter_username(username)
+pages/pages.py:34: in enter_username
+    self.send_keys(self.USERNAME_INPUT, username)
+base/base_page.py:68: in send_keys
+    element = self.find_element(locator, timeout)
+base/base_page.py:35: in find_element
+    element = wait.until(EC.presence_of_element_located(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="0408aa5915295d890b084ecfbecbca1f")>
+method = <function presence_of_element_located.<locals>._predicate at 0x104f265c0>, message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       0   chromedriver                        0x0000000100deb55c cxxbridge1$str$ptr + 2731064
+E       1   chromedriver                        0x0000000100de3454 cxxbridge1$str$ptr + 2698032
+E       2   chromedriver                        0x00000001009323f8 cxxbridge1$string$len + 90664
+E       3   chromedriver                        0x000000010097971c cxxbridge1$string$len + 382284
+E       4   chromedriver                        0x00000001009bab1c cxxbridge1$string$len + 649548
+E       5   chromedriver                        0x000000010096da0c cxxbridge1$string$len + 333884
+E       6   chromedriver                        0x0000000100dae5e0 cxxbridge1$str$ptr + 2481340
+E       7   chromedriver                        0x0000000100db1848 cxxbridge1$str$ptr + 2494244
+E       8   chromedriver                        0x0000000100d8f234 cxxbridge1$str$ptr + 2353424
+E       9   chromedriver                        0x0000000100db2104 cxxbridge1$str$ptr + 2496480
+E       10  chromedriver                        0x0000000100d802e4 cxxbridge1$str$ptr + 2292160
+E       11  chromedriver                        0x0000000100dd1ff8 cxxbridge1$str$ptr + 2627284
+E       12  chromedriver                        0x0000000100dd2184 cxxbridge1$str$ptr + 2627680
+E       13  chromedriver                        0x0000000100de3090 cxxbridge1$str$ptr + 2697068
+E       14  libsystem_pthread.dylib             0x000000018181ec0c _pthread_start + 136
+E       15  libsystem_pthread.dylib             0x0000000181819b80 thread_start + 8
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/selenium/webdriver/support/wait.py:101: TimeoutException</td>
+                    <td><a href="True" target="_blank">📷 View</a></td>
+                </tr>
+            
+                <tr class="failed">
+                    <td>5</td>
+                    <td>test_empty_credentials[-password123-Username is required]</td>
+                    <td>TestLogin</td>
+                    <td><span class="status failed">FAILED</span></td>
+                    <td>20.18s</td>
+                    <td>self = <tests.test_login.TestLogin object at 0x104a32d50>
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="cde9148954ad876f8bca93845d121503")>, username = '', password = 'password123'
+expected_error = 'Username is required'
+
+    @allure.feature("Authentication")
+    @allure.story("Empty Credentials")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("username,password,expected_error", [
+    	("", "", "Username and password are required"),
+    	("user@test.com", "", "Password is required"),
+    	("", "password123", "Username is required")
+    ])
+    def test_empty_credentials(self, driver, username, password, expected_error):
+    	"""Test login with empty credentials"""
+    	login_page = LoginPage(driver)
+    
+    	with allure.step("Open login page"):
+    		login_page.open_login_page()
+    
+    	with allure.step(f"Enter credentials: {username}, {password}"):
+>   		login_page.login(username, password)
+
+tests/test_login.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages/pages.py:46: in login
+    self.enter_username(username)
+pages/pages.py:34: in enter_username
+    self.send_keys(self.USERNAME_INPUT, username)
+base/base_page.py:68: in send_keys
+    element = self.find_element(locator, timeout)
+base/base_page.py:35: in find_element
+    element = wait.until(EC.presence_of_element_located(locator))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="cde9148954ad876f8bca93845d121503")>
+method = <function presence_of_element_located.<locals>._predicate at 0x104f26f20>, message = ''
+
+    def until(self, method: Callable[[WebDriver], Union[Literal[False], T]], message: str = "") -> T:
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       0   chromedriver                        0x0000000102d6755c cxxbridge1$str$ptr + 2731064
+E       1   chromedriver                        0x0000000102d5f454 cxxbridge1$str$ptr + 2698032
+E       2   chromedriver                        0x00000001028ae3f8 cxxbridge1$string$len + 90664
+E       3   chromedriver                        0x00000001028f571c cxxbridge1$string$len + 382284
+E       4   chromedriver                        0x0000000102936b1c cxxbridge1$string$len + 649548
+E       5   chromedriver                        0x00000001028e9a0c cxxbridge1$string$len + 333884
+E       6   chromedriver                        0x0000000102d2a5e0 cxxbridge1$str$ptr + 2481340
+E       7   chromedriver                        0x0000000102d2d848 cxxbridge1$str$ptr + 2494244
+E       8   chromedriver                        0x0000000102d0b234 cxxbridge1$str$ptr + 2353424
+E       9   chromedriver                        0x0000000102d2e104 cxxbridge1$str$ptr + 2496480
+E       10  chromedriver                        0x0000000102cfc2e4 cxxbridge1$str$ptr + 2292160
+E       11  chromedriver                        0x0000000102d4dff8 cxxbridge1$str$ptr + 2627284
+E       12  chromedriver                        0x0000000102d4e184 cxxbridge1$str$ptr + 2627680
+E       13  chromedriver                        0x0000000102d5f090 cxxbridge1$str$ptr + 2697068
+E       14  libsystem_pthread.dylib             0x000000018181ec0c _pthread_start + 136
+E       15  libsystem_pthread.dylib             0x0000000181819b80 thread_start + 8
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/selenium/webdriver/support/wait.py:101: TimeoutException</td>
+                    <td><a href="True" target="_blank">📷 View</a></td>
+                </tr>
+            
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="footer">
+                    <p>🔧 Generated by Selenium Test Framework | © 2024</p>
+                </div>
+            </div>
+
+            <script>
+                // Add some interactivity
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Animate progress bar
+                    setTimeout(() => {
+                        const progressBar = document.querySelector('.progress-fill');
+                        progressBar.style.width = '0.0%';
+                    }, 500);
+
+                    // Add click to expand error messages
+                    document.querySelectorAll('.error-message').forEach(cell => {
+                        if (cell.textContent.length > 50) {
+                            const fullText = cell.textContent;
+                            const shortText = fullText.substring(0, 50) + '...';
+                            cell.textContent = shortText;
+                            cell.style.cursor = 'pointer';
+                            cell.title = 'Click to expand';
+
+                            cell.addEventListener('click', function() {
+                                if (this.textContent === shortText) {
+                                    this.textContent = fullText;
+                                    this.title = 'Click to collapse';
+                                } else {
+                                    this.textContent = shortText;
+                                    this.title = 'Click to expand';
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+        </body>
+        </html>
+	

@@ -1,6 +1,6 @@
 import pytest
 import allure
-from pages.sample_page import LoginPage, HomePage
+from pages.pages import LoginPage, HomePage
 from utils.test_data_manager import TestDataManager
 
 
@@ -16,8 +16,8 @@ class TestLogin:
 		home_page = HomePage(driver)
 
 		# Test data
-		username = "testuser@example.com"
-		password = "testpassword123"
+		username = ""
+		password = ""
 
 		# Test steps
 		with allure.step("Open login page"):

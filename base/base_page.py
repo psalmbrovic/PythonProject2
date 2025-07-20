@@ -23,7 +23,7 @@ class BasePage:
 
 	def open(self, url: str = None):
 		"""Open URL in browser"""
-		url = url or config.BASE_URL
+		url = config.PROD_BASE_URL
 		logger.info(f"Opening URL: {url}")
 		self.driver.get(url)
 

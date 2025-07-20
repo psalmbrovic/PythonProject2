@@ -5,7 +5,11 @@ from selenium import webdriver
 from utils.driver_factory import DriverFactory
 from config.config import config
 from utils.logger import setup_logger
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from reports.html_report_generator import HTMLReportGenerator
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 logger = setup_logger(__name__)
 
@@ -15,19 +19,32 @@ test_results = []
 
 @pytest.fixture(scope="function")
 def driver():
-	"""WebDriver fixture"""
-	driver = None
-	try:
-		driver = DriverFactory.create_driver(config.BROWSER, config.HEADLESS)
-		logger.info(f"WebDriver created successfully: {config.BROWSER}")
-		yield driver
-	except Exception as e:
-		logger.error(f"Failed to create WebDriver: {str(e)}")
-		raise
-	finally:
-		if driver:
-			driver.quit()
-			logger.info("WebDriver closed successfully")
+    """WebDriver fixture"""
+    driver = None
+    try:
+        if config.BROWSER.lower() == "chrome":
+            chrome_options = webdriver.ChromeOptions()
+            if config.HEADLESS:
+                chrome_options.add_argument("--headless=new")
+                chrome_options.add_argument("--disable-gpu")
+                chrome_options.add_argument("--window-size=1920,1080")
+            # service = ChromeService(ChromeDriverManager().install())
+            service = ChromeService("/Users/abatansamuel/Desktop/My_AUTO_WORK/PythonProject2/drivers/chromedriver")
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+            logger.info("WebDriver (Chrome) created successfully")
+        else:
+            raise ValueError(f"Unsupported browser: {config.BROWSER}")
+
+        yield driver
+
+    except Exception as e:
+        logger.error(f"Failed to create WebDriver: {str(e)}")
+        raise
+
+    finally:
+        if driver:
+            driver.quit()
+            logger.info("WebDriver closed successfully")
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
